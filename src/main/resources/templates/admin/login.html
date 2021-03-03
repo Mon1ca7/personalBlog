@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="utf-8">
+    <!-- 移动端的适应 -->
+    <meta name="viewport" content="width=device-width,inital-scale=1.0">
+    <title>管理后台登录</title>
+    <!-- 使用CDN引入semantic-ui的css文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/my.css"/>
+</head>
+<body>
+<br/>
+<br/>
+<br/>
+<!-- 中间内容 -->
+<div class="m-container-small m-padded-massive" style="max-width: 30em !important;">
+    <div class="ui container">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui teal image header">
+                    <div class="content">
+                        管理后台登录
+                    </div>
+                </h2>
+                <form class="ui large form" action="#" method="post" th:action="@{/admin/login}">
+                    <div class="ui segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="username" placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="密码`">
+                            </div>
+                        </div>
+                        <div class="ui fluid large teal submit button">登       录</div>
+                    </div>
+                    <div class="ui error mini message"></div>
+                    <!--判断是否存在用户session-->
+                    <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}" >用户名或密码错误！</div>
+                </form>
+<!--                <div class="ui message">-->
+<!--                    New to us? <a href="#">Sign Up</a>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 使用CDN引入semantic-ui的js文件和jQuery -->
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+
+<script>
+    $('.ui.form').form({
+        fields : {
+            username : {
+                identifier: 'username',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入用户名'
+                }]
+            },
+            password : {
+                identifier: 'password',
+                rules: [{
+                    type : 'empty',
+                    prompt: '请输入密码'
+                }]
+            }
+        }
+    });
+</script>
+</body>
+</html>
